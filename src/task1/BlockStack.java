@@ -115,7 +115,7 @@ class BlockStack
 	public void push(final char pcBlock) throws Exception
 	{
 		accessCounter++;
-		this.acStack[++this.iTop] = acStack[0];
+		this.acStack[++this.iTop] = pcBlock;
 
 	}
 
