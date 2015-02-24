@@ -154,7 +154,7 @@ public class BlockManager
 
 		public void run()
 		{
-
+ 
 			System.out.println("AcquireBlock thread [TID=" + this.iTID + "] starts executing.");
 			
 			mutex.P();
