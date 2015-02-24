@@ -1,4 +1,4 @@
-package task3;
+package task5;
 // Import (aka include) some stuff.
 import common.*;
 
@@ -42,13 +42,13 @@ public class BlockManager
 	/**
 	 * s1 is to make sure phase I for all is done before any phase II begins
 	 */
-	//private static Semaphore s1 = new Semaphore(1);
+	private static Semaphore s1 = new Semaphore(-9);
 
 	/**
 	 * s2 is for use in conjunction with Thread.turnTestAndSet() for phase II proceed
 	 * in the thread creation order
 	 */
-	//private static Semaphore s2 = new Semaphore(...);
+	private static Semaphore s2 = new Semaphore(1);
 
 
 	// The main()
@@ -200,7 +200,18 @@ public class BlockManager
 				mutex.V();
 			}
 			
+			s1.V();
+			s1.P();
+			s1.V();
+			s2.P();
+			while (!turnTestAndSet())
+			{
+				s2.V();
+				s2.P();
+			}
 			phase2();
+			s2.V();
+			
 
 
 			System.out.println("AcquireBlock thread [TID=" + this.iTID + "] terminates.");
@@ -225,6 +236,7 @@ public class BlockManager
 
 			
 			phase1();
+			
 
 			try
 			{
@@ -265,9 +277,19 @@ public class BlockManager
 			{
 				mutex.V();
 			}
-
+			
+			s1.V();
+			s1.P();
+			s1.V();
+			s2.P();
+			while (!turnTestAndSet())
+			{
+				s2.V();
+				s2.P();
+			}
 			phase2();
-
+			s2.V();
+			
 
 			System.out.println("ReleaseBlock thread [TID=" + this.iTID + "] terminates.");
 		}
@@ -284,6 +306,7 @@ public class BlockManager
 			mutex.P();
 			phase1();
 
+			
 			try
 			{
 				for(int i = 0; i < siThreadSteps; i++)
@@ -319,10 +342,19 @@ public class BlockManager
 			{
 				mutex.V();
 			}
-
 			
+			s1.V();
+			s1.P();
+			s1.V();
+			s2.P();
+			while (!turnTestAndSet())
+			{
+				s2.V();
+				s2.P();
+			}
 			phase2();
-
+			s2.V();
+			
 		}
 	} // class CharStackProber
 

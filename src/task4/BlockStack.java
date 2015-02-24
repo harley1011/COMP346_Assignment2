@@ -124,7 +124,7 @@ class BlockStack
 	public void push(final char pcBlock) throws Exception
 	{
 		accessCounter++;
-		if ( iSize + 1 != iTop)
+		if ( iSize - 1 != iTop)
 		{
 			if (isEmpty())
 				this.acStack[++this.iTop] = acStack[0];

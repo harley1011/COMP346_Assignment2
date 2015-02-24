@@ -154,17 +154,16 @@ public class BlockManager
 
 		public void run()
 		{
- 
+			mutex.P();
 			System.out.println("AcquireBlock thread [TID=" + this.iTID + "] starts executing.");
 			
-			mutex.P();
 			phase1();
-			mutex.V();
+
 
 			try
 			{
 				System.out.println("AcquireBlock thread [TID=" + this.iTID + "] requests Ms block.");
-				mutex.P();
+
 				this.cCopy = soStack.pop();
 
 				System.out.println
@@ -172,7 +171,7 @@ public class BlockManager
 					"AcquireBlock thread [TID=" + this.iTID + "] has obtained Ms block " + this.cCopy +
 					" from position " + (soStack.getITop() + 1) + "."
 				);
-				mutex.V();
+			
 
 				System.out.println
 				(
@@ -185,6 +184,7 @@ public class BlockManager
 					"Acq[TID=" + this.iTID + "]: Current value of stack top = " +
 					soStack.pick() + "."
 				);
+				
 			}
 			catch(MyException e)
 			{
@@ -195,10 +195,16 @@ public class BlockManager
 				reportException(e);
 				System.exit(1);
 			}
+			finally
+			{
+				mutex.V();
+			}
+			
 			s1.V();
 			s1.P();
 			phase2();
 			s1.V();
+
 
 			System.out.println("AcquireBlock thread [TID=" + this.iTID + "] terminates.");
 		}
@@ -217,10 +223,12 @@ public class BlockManager
 
 		public void run()
 		{
+			mutex.P();
 			System.out.println("ReleaseBlock thread [TID=" + this.iTID + "] starts executing.");
 
-			mutex.P();
+			
 			phase1();
+			
 
 			try
 			{
@@ -235,7 +243,7 @@ public class BlockManager
 				);
 				
 				soStack.push(this.cBlock);
-				mutex.V();
+				
 				System.out.println
 				(
 					"Rel[TID=" + this.iTID + "]: Current value of top = " +
@@ -257,6 +265,11 @@ public class BlockManager
 				reportException(e);
 				System.exit(1);
 			}
+			finally
+			{
+				mutex.V();
+			}
+			
 			s1.V();
 			s1.P();
 			phase2();
@@ -276,12 +289,13 @@ public class BlockManager
 		{
 			mutex.P();
 			phase1();
-			mutex.V();
+
+			
 			try
 			{
 				for(int i = 0; i < siThreadSteps; i++)
 				{
-					mutex.P();
+
 					System.out.print("Stack Prober [TID=" + this.iTID + "]: Stack state: ");
 
 					// [s] - means ordinay slot of a stack
@@ -296,7 +310,7 @@ public class BlockManager
 						);
 					
 					System.out.println(".");
-					mutex.V();
+
 				}
 			}
 			catch(MyException e)
@@ -308,7 +322,11 @@ public class BlockManager
 				reportException(e);
 				System.exit(1);
 			}
-
+			finally
+			{
+				mutex.V();
+			}
+			
 			s1.V();
 			s1.P();
 			phase2();
