@@ -17,7 +17,7 @@ class BlockStack
 	/**
 	 * # of letters in the English alphabet + 2
 	 */
-	public static final int MAX_SIZE = 29;
+	public static final int MAX_SIZE = 28;
 
 	/**
 	 * Default stack size
