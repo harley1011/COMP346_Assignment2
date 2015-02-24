@@ -96,11 +96,9 @@ class BlockStack
 	 */
 	public char pick() throws MyException
 	{
-		if ( !isEmpty())
-		{
-			accessCounter++;
+		accessCounter++;
+		if ( !isEmpty())	
 			return this.acStack[this.iTop];
-		}
 		else
 			throw new MyException("Can't pick the Stack because it is empty");
 	}
@@ -112,6 +110,7 @@ class BlockStack
 	 */
 	public char getAt(final int piPosition) throws MyException
 	{
+		accessCounter++;
 		if ( piPosition <= iSize - 1)
 			return this.acStack[piPosition];
 		else
@@ -124,13 +123,13 @@ class BlockStack
 	 */
 	public void push(final char pcBlock) throws Exception
 	{
+		accessCounter++;
 		if ( iSize + 1 != iTop)
 		{
-			accessCounter++;
-		if (isEmpty())
-			this.acStack[++this.iTop] = acStack[0];
-		else
-			this.acStack[++this.iTop] = pcBlock;
+			if (isEmpty())
+				this.acStack[++this.iTop] = acStack[0];
+			else
+				this.acStack[++this.iTop] = pcBlock;
 		}
 		else
 			throw new MyException("Stack is full");
@@ -143,9 +142,9 @@ class BlockStack
 	 */
 	public char pop() throws MyException
 	{
+		accessCounter++;
 		if ( !isEmpty())
 		{
-			accessCounter++;
 			char cBlock = this.acStack[this.iTop];
 			this.acStack[this.iTop--] = '$'; // Leave prev. value undefined
 			return cBlock;

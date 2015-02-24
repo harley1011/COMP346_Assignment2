@@ -105,6 +105,7 @@ class BlockStack
 	 */
 	public char getAt(final int piPosition)
 	{
+		accessCounter++;
 		return this.acStack[piPosition];
 	}
 
