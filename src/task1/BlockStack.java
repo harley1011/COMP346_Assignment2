@@ -115,7 +115,7 @@ class BlockStack
 	 */
 	public char pick()
 	{
-		accessCounter++;
+		accessCounter++; // Increment the number of times stack is accessed.
 		return this.acStack[this.iTop];
 	}
 
@@ -125,7 +125,7 @@ class BlockStack
 	 */
 	public char getAt(final int piPosition)
 	{
-		accessCounter++;
+		accessCounter++; // Increment the number of times stack is accessed.
 		return this.acStack[piPosition];
 	}
 
@@ -135,7 +135,7 @@ class BlockStack
 	 */
 	public void push(final char pcBlock) throws Exception
 	{
-		accessCounter++;
+		accessCounter++; // Increment the number of times stack is accessed.
 		this.acStack[++this.iTop] = pcBlock;
 
 	}
@@ -146,7 +146,7 @@ class BlockStack
 	 */
 	public char pop()
 	{
-		accessCounter++;
+		accessCounter++; // Increment the number of times stack is accessed.
 		char cBlock = this.acStack[this.iTop];
 		this.acStack[this.iTop--] = '$'; // Leave prev. value undefined
 		return cBlock;
