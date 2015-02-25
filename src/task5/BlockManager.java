@@ -48,7 +48,7 @@ public class BlockManager
 	 * s2 is for use in conjunction with Thread.turnTestAndSet() for phase II proceed
 	 * in the thread creation order
 	 */
-	private static Semaphore s2 = new Semaphore(1);
+	private static Semaphore s2 = new Semaphore(1); // Added a new semaphore
 
 
 	// The main()
@@ -202,15 +202,15 @@ public class BlockManager
 			
 			s1.V();
 			s1.P();
-			s1.V();
-			s2.P();
+			s1.V(); // Added this line to make sure all phase 1's have gone and then signal each to go.
+			s2.P(); // From this point, only one thread can enter phase 2 at a time. 
 			while (!turnTestAndSet())
 			{
-				s2.V();
-				s2.P();
+				s2.V(); // These two lines are to give other
+				s2.P(); // threads a chance to check their turn.
 			}
 			phase2();
-			s2.V();
+			s2.V(); // Release access to other threads.
 			
 
 
@@ -280,15 +280,15 @@ public class BlockManager
 			
 			s1.V();
 			s1.P();
-			s1.V();
-			s2.P();
+			s1.V(); // Added this line to make sure all phase 1's have gone and then signal each to go.
+			s2.P(); // From this point, only one thread can enter phase 2 at a time.
 			while (!turnTestAndSet())
 			{
-				s2.V();
-				s2.P();
+				s2.V(); // These two lines are to give other
+				s2.P(); // threads a chance to check their turn.
 			}
 			phase2();
-			s2.V();
+			s2.V(); // Release access to other threads.
 			
 
 			System.out.println("ReleaseBlock thread [TID=" + this.iTID + "] terminates.");
@@ -345,15 +345,15 @@ public class BlockManager
 			
 			s1.V();
 			s1.P();
-			s1.V();
-			s2.P();
+			s1.V(); // Added this line to make sure all phase 1's have gone and then signal each to go.
+			s2.P(); // From this point, only one thread can enter phase 2 at a time.
 			while (!turnTestAndSet())
 			{
-				s2.V();
-				s2.P();
+				s2.V(); // These two lines are to give other
+				s2.P(); // threads a chance to check their turn.
 			}
 			phase2();
-			s2.V();
+			s2.V(); // Release access to other threads.
 			
 		}
 	} // class CharStackProber
