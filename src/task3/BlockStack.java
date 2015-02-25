@@ -44,18 +44,35 @@ class BlockStack
 	public char[] getAcStack() {
 		return acStack;
 	}
-
+	
+	/**
+	 * Accessor method
+	 * @return the access counter
+	 */
 	public int getAccessCounter() {
 		return accessCounter;
 	}
 	
+	/**
+	 * Accessor method
+	 * @return the size of the stack
+	 */
 	public int getISize() {
 		return iSize;
 	}
 
+	/**
+	 * Accessor method
+	 * @return the current index for the top of the stack
+	 */
 	public int getITop() {
 		return iTop;
 	}
+	
+	/**
+	 * Method to determine if stack is empty.
+	 * @return True if stack is empty, false otherwise.
+	 */
 	public boolean isEmpty()
 	{
 		return (this.iTop == -1);
