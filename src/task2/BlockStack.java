@@ -27,35 +27,55 @@ class BlockStack
 	/**
 	 * Current size of the stack
 	 */
-	private int iSize = DEFAULT_SIZE;
+	private int iSize = DEFAULT_SIZE; // Changed to private
 	
-	private int accessCounter = 0;
+	/**
+	 * This access counter will keep track of the number of times the stack is accessed. 
+	 */
+	private int accessCounter = 0; // Changed to private
 	
 	/**
 	 * Current top of the stack
 	 */
-	private int iTop  = 3;
+	private int iTop  = 3; // Changed to private
 	
 	/**
 	 * stack[0:5] with four defined values
 	 */
-	private char acStack[] = new char[] {'a', 'b', 'c', 'd', '$', '$'};
+	private char acStack[] = new char[] {'a', 'b', 'c', 'd', '$', '$'}; // Changed to private
 
 	public char[] getAcStack() {
 		return acStack;
 	}
 
+	/**
+	 * Accessor method
+	 * @return the access counter
+	 */
 	public int getAccessCounter() {
 		return accessCounter;
 	}
 	
+	/**
+	 * Accessor method
+	 * @return the size of the stack
+	 */
 	public int getISize() {
 		return iSize;
 	}
 
+	/**
+	 * Accessor method
+	 * @return the current index for the top of the stack
+	 */
 	public int getITop() {
 		return iTop;
 	}
+	
+	/**
+	 * Method to determine if stack is empty.
+	 * @return True if stack is empty, false otherwise.
+	 */
 	public boolean isEmpty()
 	{
 		return (this.iTop == -1);
@@ -100,7 +120,7 @@ class BlockStack
 		if ( !isEmpty())	
 			return this.acStack[this.iTop];
 		else
-			throw new MyException("Can't pick the Stack because it is empty");
+			throw new MyException("Can't pick the Stack because it is empty"); // Modified method to handle the case when stack is empty.
 	}
 
 	/**
@@ -114,7 +134,8 @@ class BlockStack
 		if ( piPosition <= iSize - 1)
 			return this.acStack[piPosition];
 		else
-			throw new MyException("Can't access position " + piPosition + " in the stack because it is greater then iSize which is " + iSize);
+			throw new MyException("Can't access position " + piPosition + " in the stack because it is greater then iSize which is " + iSize); 
+		// Modified method to handle case when accessing non index out of bounds of stack
 	}
 
 	/**
@@ -133,6 +154,7 @@ class BlockStack
 		}
 		else
 			throw new MyException("Stack is full");
+		// Modified method to handle case when stack is full
 	}
 
 	/**
@@ -151,6 +173,7 @@ class BlockStack
 		}
 		else
 			throw new MyException("Stack is empty");
+		// Modified method to handle case when stack is empty.
 	}
 }
 
