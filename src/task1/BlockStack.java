@@ -29,6 +29,9 @@ class BlockStack
 	 */
 	public int iSize = DEFAULT_SIZE;
 	
+	/**
+	 * This access counter will keep track of the number of times the stack is accessed. 
+	 */
 	public int accessCounter = 0;
 	
 	/**
@@ -40,22 +43,39 @@ class BlockStack
 	 * stack[0:5] with four defined values
 	 */
 	public char acStack[] = new char[] {'a', 'b', 'c', 'd', '$', '$'};
-
+	
 	public char[] getAcStack() {
 		return acStack;
 	}
-
+	
+	/**
+	 * Added this accessor method
+	 * @return the access counter
+	 */
 	public int getAccessCounter() {
 		return accessCounter;
 	}
 	
+	/**
+	 * Added this accessor method
+	 * @return the size of the stack
+	 */
 	public int getISize() {
 		return iSize;
 	}
-
+	
+	/**
+	 * Added this accessor method
+	 * @return the current index for the top of the stack
+	 */
 	public int getITop() {
 		return iTop;
 	}
+	
+	/**
+	 * Added this method to determine if stack is empty.
+	 * @return True if stack is empty, false otherwise.
+	 */
 	public boolean isEmpty()
 	{
 		return (this.iTop == -1);
