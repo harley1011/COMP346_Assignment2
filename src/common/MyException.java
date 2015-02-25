@@ -1,7 +1,7 @@
 package common;
 /**
  * Implements the MyException class.
- * A custom exception class to handle errors in the program.
+ * Added this custom exception class to handle errors in the program. 
  * @author Harrison Ianatchkov, Harley McPhee
  *
  */
