@@ -249,7 +249,7 @@ public class BlockManager
 					soStack.pick() + "."
 				);
 			}
-			catch(MyException e)
+			catch(MyException e) // Added exception handling
 			{
 				reportException(e);
 			}
@@ -299,7 +299,7 @@ public class BlockManager
 					
 				}
 			}
-			catch(MyException e)
+			catch(MyException e) // Added exception handling
 			{
 				reportException(e);
 			}
@@ -320,7 +320,7 @@ public class BlockManager
 	 * Outputs exception information to STDERR
 	 * @param poException Exception object to dump to STDERR
 	 */
-	private static void reportException(Exception poException)
+	private static void reportException(Exception poException) 
 	{
 		System.err.println("Caught exception : " + poException.getClass().getName());
 		System.err.println("Message          : " + poException.getMessage());
