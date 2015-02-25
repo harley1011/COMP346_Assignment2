@@ -186,7 +186,7 @@ public class BlockManager
 					soStack.pick() + "."
 				);
 			}
-			catch(MyException e)
+			catch(MyException e) // Added exception handling
 			{
 				reportException(e);
 			}
