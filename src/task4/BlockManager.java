@@ -42,7 +42,7 @@ public class BlockManager
 	/**
 	 * s1 is to make sure phase I for all is done before any phase II begins
 	 */
-	private static Semaphore s1 = new Semaphore(-9);
+	private static Semaphore s1 = new Semaphore(-9); // Added this second semaphore
 
 	/**
 	 * s2 is for use in conjunction with Thread.turnTestAndSet() for phase II proceed
@@ -200,10 +200,10 @@ public class BlockManager
 				mutex.V();
 			}
 			
-			s1.V();
-			s1.P();
+			s1.V(); // Added these lines to assure that
+			s1.P(); // phase 2 cannot start before all phase 1's have completed
 			phase2();
-			s1.V();
+			s1.V(); // Added this line to then release the semaphore once a phase 2 is complete.
 
 
 			System.out.println("AcquireBlock thread [TID=" + this.iTID + "] terminates.");
@@ -229,7 +229,6 @@ public class BlockManager
 			
 			phase1();
 			
-
 			try
 			{
 				if(soStack.isEmpty() == false)
@@ -270,10 +269,10 @@ public class BlockManager
 				mutex.V();
 			}
 			
-			s1.V();
-			s1.P();
+			s1.V(); // Added these lines to assure that
+			s1.P(); // phase 2 cannot start before all phase 1's have completed
 			phase2();
-			s1.V();
+			s1.V(); // Added this line to then release the semaphore once a phase 2 is complete.
 
 			System.out.println("ReleaseBlock thread [TID=" + this.iTID + "] terminates.");
 		}
@@ -289,7 +288,6 @@ public class BlockManager
 		{
 			mutex.P();
 			phase1();
-
 			
 			try
 			{
@@ -327,10 +325,10 @@ public class BlockManager
 				mutex.V();
 			}
 			
-			s1.V();
-			s1.P();
+			s1.V(); // Added these lines to assure that
+			s1.P(); // phase 2 cannot start before all phase 1's have completed
 			phase2();
-			s1.V();
+			s1.V(); // Added this line to then release the semaphore once a phase 2 is complete.
 		}
 	} // class CharStackProber
 

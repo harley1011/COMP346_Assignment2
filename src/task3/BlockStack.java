@@ -29,6 +29,9 @@ class BlockStack
 	 */
 	private int iSize = DEFAULT_SIZE;
 	
+	/**
+	 * This access counter will keep track of the number of times the stack is accessed. 
+	 */
 	private int accessCounter = 0;
 	
 	/**
