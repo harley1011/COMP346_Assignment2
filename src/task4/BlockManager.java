@@ -42,7 +42,7 @@ public class BlockManager
 	/**
 	 * s1 is to make sure phase I for all is done before any phase II begins
 	 */
-	private static Semaphore s1 = new Semaphore(-9); // Added this second semaphore
+	private static Semaphore s1 = new Semaphore(-9); // The value of -9 requires that 10 V() operations be called before any Phase 2 for any thread can start
 
 	/**
 	 * s2 is for use in conjunction with Thread.turnTestAndSet() for phase II proceed
